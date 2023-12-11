@@ -1,4 +1,4 @@
-
+module rate_div(en, rst, clk, countdown_start, c); 
 Input en, rst, clk
 Input [27:0]countdown_start  // countdown 
 Output reg [27:0]c  // current count 
