@@ -1,0 +1,17 @@
+
+Input en, rst, clk
+Input [27:0]countdown_start  // countdown 
+Output reg [27:0]c  // current count 
+
+// counts down all the way to zero 
+
+Always @(posedge clk)
+Begin 
+	If (rst == 1'b1) 
+		c<= countdown_start;
+	Else if (en == 1'b1)
+		C <= ( q == 0) ? Countdown_start : q - 1'b1; // looping back once hitting zero
+		
+	End 
+Endmodule
+//credit_wgranados 
