@@ -1,0 +1,15 @@
+|Final_Project_287
+clk => S~1.DATAIN
+rst => S~3.DATAIN
+start => NS.GAME.DATAB
+start => Selector0.IN1
+start => S.HOME.DATAIN
+look[0] => ~NO_FANOUT~
+look[1] => ~NO_FANOUT~
+look[2] => ~NO_FANOUT~
+shoot => ~NO_FANOUT~
+home_disp <= <GND>
+game_disp <= <GND>
+end_disp <= <GND>
+
+

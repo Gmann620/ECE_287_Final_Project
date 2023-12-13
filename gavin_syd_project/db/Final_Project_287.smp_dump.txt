@@ -1,0 +1,6 @@
+
+State Machine - |Final_Project_287|S
+Name S.HOME S.END S.GAME 
+S.HOME 0 0 0 
+S.GAME 1 0 1 
+S.END 1 1 0 
