@@ -1,0 +1,17 @@
+	component audio_core is
+		port (
+			address     : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			chipselect  : in  std_logic                     := 'X';             -- chipselect
+			read        : in  std_logic                     := 'X';             -- read
+			write       : in  std_logic                     := 'X';             -- write
+			writedata   : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			readdata    : out std_logic_vector(31 downto 0);                    -- readdata
+			clk         : in  std_logic                     := 'X';             -- clk
+			AUD_ADCDAT  : in  std_logic                     := 'X';             -- ADCDAT
+			AUD_ADCLRCK : in  std_logic                     := 'X';             -- ADCLRCK
+			AUD_BCLK    : in  std_logic                     := 'X';             -- BCLK
+			irq         : out std_logic;                                        -- irq
+			reset       : in  std_logic                     := 'X'              -- reset
+		);
+	end component audio_core;
+
