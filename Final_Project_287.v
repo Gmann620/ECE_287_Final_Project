@@ -30,10 +30,10 @@ module Final_Project_287(
 //								 			);
 
 //health my_health(.clk(clk),
+//						 .health(health)
 //						 .rst(rst),
-//					    .healthUp(),
+//					    .health_update(),
 //					    .startGame(start),
-//					    .health(health)
 //					    );
 
 //enemy_movement my_en1_movement(.clk(clk),
@@ -59,7 +59,11 @@ module Final_Project_287(
 //							    .
 //							    );
 
-vga_driver vga(.clock(clk), //maybe change clk for this?? 
+clk_halfer my_halfer(.clk(clk),
+							.half_clk(clk_25MHz)
+							);
+
+vga_driver vga(.clock(clk_25MHz), //maybe change clk for this?? 
 					.reset(rst), 
 					.color_in(color_input), 
 					.next_x(next_x), 
@@ -75,21 +79,22 @@ vga_driver vga(.clock(clk), //maybe change clk for this??
 					);
 
 /* VGA Regs and Wires */
-reg [7:0] color_input;		//RGB value of current pixel
+wire clk_25MHz;					//25MHz clock for vga
+wire [7:0] color_input;		//RGB value of current pixel
 wire [9:0] next_x, next_y; //Coords of next pixel
 
 /* Module Regs and Wires */
 
 
 /* Game Logic Regs and Wires */
-//wire [:0] health;
+wire health;
 //wire [:0] weapon_cooldown;
 //wire [:0] score;
 
-//wire [:0] user_x;
+wire [7:0] user_x;
 
-//wire [:0] enemy_1_x, enemy_2_x, enemy_3_x;
-//wire [:0] enemy_1_y, enemy_2_y, enemy_3_y;
+wire [7:0] enemy_1_x, enemy_2_x, enemy_3_x;
+wire [7:0] enemy_1_y, enemy_2_y, enemy_3_y;
 
 /* State Parameters */
 reg [2:0] S, NS;
@@ -127,7 +132,7 @@ begin
 		
 		UPDATE:
 		begin
-			if (game_end == 1'b1)
+			if (health == 1'b0)
 			begin
 				NS = END;
 			end
