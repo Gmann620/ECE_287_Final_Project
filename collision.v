@@ -1,4 +1,4 @@
-module collision_handler(rst, clk, start, health_update, user_x, enemy_y);
+module collision(rst, clk, start, health_update, user_x, enemy_y);
 	input clk; 
 	input start; 
 	input rst;
