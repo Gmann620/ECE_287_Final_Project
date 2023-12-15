@@ -12,19 +12,19 @@ module Final_Project_287(
 	output [7:0] GREEN,			// VGA green
 	output [7:0] BLUE,			// VGA blue
 	output vga_blank,				// VGA blank
-	output game_end				// Game end signal
+	output reg game_end				// Game end signal
 	); 
 
 /* Module Initialization */
-//projectile_movement proj(.rst(rst), 
-//									.clk(clk),
-//									.shoot(shoot),
-//									.playerx(user_x),
-//									.has_collided()
-//									.projX(projectile_x),
-//									.projy(projectile_y),
-//									.exists(projectile_exists)
-//									);
+//projectile_movement my_proj_movement(.rst(rst), 
+//													.clk(clk),
+//													.shoot(shoot),
+//													.playerx(user_x),
+//													.has_collided()
+//													.projX(projectile_x),
+//													.projy(projectile_y),
+//													.exists(projectile_exists)
+//													);
 
 //user_movement my_play_movement(.clk(clk),
 //											.rst(rst),
@@ -85,16 +85,16 @@ vga_driver vga(.clock(clk_25MHz), //resolution 640x480
 
 /* VGA Regs and Wires */
 wire clk_25MHz;					//25MHz clock for vga
-reg [7:0] color_input;		//RGB value of current pixel
-wire [9:0] next_x, next_y; //Coords of next pixel
+reg [7:0] color_input;			//RGB value of current pixel
+wire [9:0] next_x, next_y; 	//Coords of next pixel
 
 /* Module Regs and Wires */
 wire health_update;
 
 /* Game Logic Regs and Wires */
 wire health;
-//wire [:0] weapon_cooldown;
-//wire [:0] score;
+wire [23:0] weapon_cooldown;
+wire [15:0] score;
 
 wire [7:0] user_x;
 wire [6:0] user_y = 7'd119;
@@ -103,7 +103,7 @@ wire [7:0] enemy_1_x, enemy_2_x, enemy_3_x;
 wire [7:0] enemy_1_y, enemy_2_y, enemy_3_y;
 
 wire [7:0] projectile_x, projectile_y;
-reg projectile_exists;
+wire projectile_exists;
 
 /* State Parameters */
 reg [2:0] S, NS;
@@ -145,6 +145,10 @@ begin
 			begin
 				NS = END;
 			end
+			else if (start == 1'b0)
+			begin
+				NS = HOME;
+			end
 			else
 			begin
 				NS = UPDATE;
@@ -171,13 +175,16 @@ always@(posedge clk or negedge rst)
 begin
 	if (rst == 1'b0)
 	begin
-		
+		game_end <= 1'b0;
+		color_input <= 8'b11111111;
 	end
 	else
 	begin
 		case(S)
 			HOME:
 			begin
+				game_end <= 1'b0;
+				color_input <= 8'b11111111;
 				
 			end //end HOME
 			
@@ -188,6 +195,8 @@ begin
 			
 			END:
 			begin
+				game_end <= 1'b1;
+				color_input <= 8'b11100000;
 				
 			end //end END
 		endcase
