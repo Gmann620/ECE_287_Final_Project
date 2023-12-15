@@ -15,54 +15,63 @@ module Final_Project_287(
 	output reg game_end				// Game end signal
 	); 
 
+
+	wire collision; 
+	wire exists; 
 /* Module Initialization */
-//projectile_movement my_proj_movement(.rst(rst), 
-//													.clk(clk),
-//													.shoot(shoot),
-//													.playerx(user_x),
-//													.has_collided()
-//													.projX(projectile_x),
-//													.projy(projectile_y),
-//													.exists(projectile_exists)
-//													);
+projectile my_proj_movement(.rst(rst), 
+													.clk(clk),
+													.shoot(shoot),
+													.playerx(user_x),
+													.has_collided(collision),
+													.projx(projectile_x),
+													.projy(projectile_y),
+													.exists(projectile_exists)
+													);
 
-//user_movement my_play_movement(.clk(clk),
-//											.rst(rst),
-//				  				 			.right(look_right),
-//				  				 			.left(look_left),
-//				  				 			.startGame(start),
-//				  				 			.x_val(user_x)
-//								 			);
+movement my_movement(.clk(clk),
+											.rst(rst),
+				  				 			.right(look_right),
+				  				 			.left(look_left),
+				  				 			.start(start),
+				  				 			.x_val(user_x)
+								 			);
 
-//health my_health(.health(health).
-//						 .clk(clk),
-//						 .rst(rst),
-//					    .health_update(),
-//					    .startGame(start),
-//					    );
+health my_health(.health(health),
+						 .clk(clk),
+						 .rst(rst),
+					    .health_update(health_update),
+					    .start(start),
+					    );
 
-//enemy_movement my_en1_movement(.clk(clk),
-//											.rst(rst),
-//											.startGame(start),
-//											.y_val(enemy_1_y),
-//											);
+enemy my_en1_movement(.clk(clk),
+											.rst(rst),
+											.collision(collision),
+											.exists(exists),
+											.enemy_y(enemy_1_y),
+											);
 									
-//enemy_movement my_en2_movement(.clk(clk),
-//											.rst(rst),
-//											.startGame(start),
-//											.y_val(enemy_2_y),
-//											);
+enemy my_en2_movement(.clk(clk),
+											.rst(rst),
+											.collision(collision), 
+											.exists(exists),
+											.enemy_y(enemy_2_y),
+											);
 								
-//enemy_movement my_en3_movement(.clk(clk),
-//											.rst(rst),
-//											.startGame(start),
-//											.y_val(enemy_3_y),
-//											);
+enemy my_en3_movement(.clk(clk),
+											.rst(rst),
+											.collision(collision), 
+											.exists(exists),
+											.enemy_y(enemy_3_y),
+											);
 
-//collision_handler my_collision(.clk(clk),
-//							  	 			.startGame(start),
-//							    			.
-//							    			);
+collision_handler my_collision(.clk(clk),
+							  	 			.start(start),
+							    			.rst(rst), 
+											.enemy_1_y(enemy_1_y),
+											.enemy_2_y(enemy_2_y),
+											.enemy_3_y(enemy_3_y),
+							    			);
 
 clk_halfer my_halfer(.clk(clk),
 							.half_clk(clk_25MHz)
