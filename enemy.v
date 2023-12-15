@@ -12,15 +12,21 @@ output reg exists
 
 always @ (posedge clk or negedge rst)
 begin 
-	if (rst) 
+	if (!rst) 
 	begin
-		enemy_exists <= 1'b1; 
-		enemy_y <= 10'd0; 	
+		/*exists <= 1'b1; 
+		enemy_y <= 10'd0; */
+		if (exists && !collision) 
+		begin 
+			enemy_y <= enemy_y + 10'd10; 
+		end	
+	
 	end 
-	else if (exists && !collision) 
-	begin 
-		enem_y <= enemy_y + 10'd10; 
-	end
+	else begin 
+	exists <= 1'b1; 
+		enemy_y <= 10'd0;
+	end 
+		
 end 
 
 endmodule 
