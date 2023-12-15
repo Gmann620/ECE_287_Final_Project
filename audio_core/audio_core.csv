@@ -1,0 +1,23 @@
+# system info audio_core on 2023.12.13.16:27:01
+system_info:
+name,value
+DEVICE,EP4CE115F29C7
+DEVICE_FAMILY,Cyclone IV E
+GENERATION_ID,1702502820
+#
+#
+# Files generated for audio_core on 2023.12.13.16:27:01
+files:
+filepath,kind,attributes,module,is_top
+simulation/audio_core.v,VERILOG,,audio_core,true
+simulation/submodules/altera_up_audio_bit_counter.v,VERILOG,,audio_core_audio_0,false
+simulation/submodules/altera_up_audio_in_deserializer.v,VERILOG,,audio_core_audio_0,false
+simulation/submodules/altera_up_audio_out_serializer.v,VERILOG,,audio_core_audio_0,false
+simulation/submodules/altera_up_clock_edge.v,VERILOG,,audio_core_audio_0,false
+simulation/submodules/altera_up_sync_fifo.v,VERILOG,,audio_core_audio_0,false
+simulation/submodules/audio_core_audio_0.v,VERILOG,,audio_core_audio_0,false
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+audio_core.audio_0,audio_core_audio_0
