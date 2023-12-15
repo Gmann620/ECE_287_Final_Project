@@ -16,9 +16,14 @@ module Final_Project_287(
 	); 
 
 /* Module Initialization */
-//projectile_movement proj(.clk(clk), 
-//									.rst(rst),
-//									.
+//projectile_movement proj(.rst(rst), 
+//									.clk(clk),
+//									.shoot(shoot),
+//									.playerx(user_x),
+//									.has_collided()
+//									.projX(projectile_x),
+//									.projy(projectile_y),
+//									.exists(projectile_exists)
 //									);
 
 //user_movement my_play_movement(.clk(clk),
@@ -29,8 +34,8 @@ module Final_Project_287(
 //				  				 			.x_val(user_x)
 //								 			);
 
-//health my_health(.clk(clk),
-//						 .health(health)
+//health my_health(.health(health).
+//						 .clk(clk),
 //						 .rst(rst),
 //					    .health_update(),
 //					    .startGame(start),
@@ -54,17 +59,17 @@ module Final_Project_287(
 //											.y_val(enemy_3_y),
 //											);
 
-//collision my_collision(.clk(clk),
-//							  	 .startGame(start),
-//							    .
-//							    );
+//collision_handler my_collision(.clk(clk),
+//							  	 			.startGame(start),
+//							    			.
+//							    			);
 
 clk_halfer my_halfer(.clk(clk),
 							.half_clk(clk_25MHz)
 							);
 
-vga_driver vga(.clock(clk_25MHz), //maybe change clk for this?? 
-					.reset(rst), 
+vga_driver vga(.clock(clk_25MHz), //resolution 640x480
+					.reset(!rst), 
 					.color_in(color_input), 
 					.next_x(next_x), 
 					.next_y(next_y), 
@@ -80,11 +85,11 @@ vga_driver vga(.clock(clk_25MHz), //maybe change clk for this??
 
 /* VGA Regs and Wires */
 wire clk_25MHz;					//25MHz clock for vga
-wire [7:0] color_input;		//RGB value of current pixel
+reg [7:0] color_input;		//RGB value of current pixel
 wire [9:0] next_x, next_y; //Coords of next pixel
 
 /* Module Regs and Wires */
-
+wire health_update;
 
 /* Game Logic Regs and Wires */
 wire health;
@@ -92,9 +97,13 @@ wire health;
 //wire [:0] score;
 
 wire [7:0] user_x;
+wire [6:0] user_y = 7'd119;
 
 wire [7:0] enemy_1_x, enemy_2_x, enemy_3_x;
 wire [7:0] enemy_1_y, enemy_2_y, enemy_3_y;
+
+wire [7:0] projectile_x, projectile_y;
+reg projectile_exists;
 
 /* State Parameters */
 reg [2:0] S, NS;
