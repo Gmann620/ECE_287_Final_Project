@@ -65,7 +65,7 @@ enemy my_en3_movement(.clk(clk),
 											.enemy_y(enemy_3_y),
 											);
 
-collision_handler my_collision(.clk(clk),
+collision my_collision(.clk(clk),
 							  	 			.start(start),
 							    			.rst(rst), 
 											.enemy_1_y(enemy_1_y),
@@ -76,6 +76,24 @@ collision_handler my_collision(.clk(clk),
 clk_halfer my_halfer(.clk(clk),
 							.half_clk(clk_25MHz)
 							);
+							
+draw_logic my_draw(.clk(clk),
+						 .rst(rst),
+						 .start(start),
+						 .user_x(user_x),
+						 .user_y(user_y),
+						 .enemy_1_x(enemy_1_x),
+						 .enemy_2_x(enemy_2_x),
+						 .enemy_3_x(enemy_3_x),
+						 .enemy_1_y(enemy_1_y),
+						 .enemy_2_y(enemy_2_y),
+						 .enemy_3_y(enemy_3_y),
+						 .projectile_x(projectile_x),
+						 .projectile_y(projectile_y),
+						 .next_x(next_x),
+						 .next_y(next_y),
+						 .color_out(color_input)
+						 );
 
 vga_driver vga(.clock(clk_25MHz), //resolution 640x480
 					.reset(!rst), 
@@ -185,7 +203,7 @@ begin
 	if (rst == 1'b0)
 	begin
 		game_end <= 1'b0;
-		color_input <= 8'b11111111;
+		//color_input <= 8'b11111111;
 	end
 	else
 	begin
@@ -193,7 +211,7 @@ begin
 			HOME:
 			begin
 				game_end <= 1'b0;
-				color_input <= 8'b11111111;
+				//color_input <= 8'b11111111;
 				
 			end //end HOME
 			
@@ -205,7 +223,7 @@ begin
 			END:
 			begin
 				game_end <= 1'b1;
-				color_input <= 8'b11100000;
+				//color_input <= 8'b11100000;
 				
 			end //end END
 		endcase
