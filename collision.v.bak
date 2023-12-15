@@ -1,4 +1,4 @@
-module collision_handler(rst, clk, start, health_update, enemy_1_y, enemy_2_y, enemy_3_y);
+module collision_handler(rst, clk, start, health_update, user_y, enemy_y);
 	input clk; 
 	input start; 
 	input rst;
@@ -10,10 +10,6 @@ module collision_handler(rst, clk, start, health_update, enemy_1_y, enemy_2_y, e
 
 	always@(posedge clk or negedge rst)
 	begin
-	
-	if (!rst) 
-	begin 
-	
 		if(enemy_1_y == 8'd119)begin
 			health_update <= 1'b1;
 		end
@@ -26,10 +22,6 @@ module collision_handler(rst, clk, start, health_update, enemy_1_y, enemy_2_y, e
 		else begin
 			health_update <= 1'b0;
 		end
-	
-	end else begin 
-	
-		health_update <= 1'b0;
 	end
-end
+
 endmodule
